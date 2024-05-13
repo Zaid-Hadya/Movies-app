@@ -1,6 +1,8 @@
 import {View, Text, Touchable, TouchableOpacity, ScrollView} from 'react-native'
-import React from 'react'
+import React, {useState} from "react"
 import {Bars3CenterLeftIcon, MagnifyingGlassIcon} from 'react-native-heroicons/outline';
+import TrendingMovies from '../components/trendingMovies';
+
 
 export default function HomeScreen(){
 const [trending, setTrending] = useState([1,2,3])/*Array def*/
@@ -20,10 +22,13 @@ const [trending, setTrending] = useState([1,2,3])/*Array def*/
       </TouchableOpacity>
     </View>
   
-      <ScrollView showsVerticalScrollIndicator={false}
-      contentContainerStyle={{paddingBottom: 10}}>
+      <ScrollView 
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{paddingBottom: 10}}
+      >
         {/*Trending Movies*/}
-      <Trending data={trending} />
+
+      <TrendingMovies data={trending} />
       </ScrollView>
 
     </View>
