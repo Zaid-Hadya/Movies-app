@@ -1,12 +1,11 @@
 import {View, Text} from 'react-native'
 import React from 'react'
-export default function Navigation(){
+
+export default function HomeScreen(){
     return (
-<NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <View className="flex-1 bg-neutral-800">
+  <Text>HomeScreen</Text>
+    </View>
 
     )
 }
