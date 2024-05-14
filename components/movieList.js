@@ -6,8 +6,8 @@ import {
   TouchableWithoutFeedback,
   ScrollView,
   Dimensions,
-  Image,
 } from "react-native";
+import { Image } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
 
@@ -23,9 +23,7 @@ export default function MovieList({ title, data }) {
       <View className="mx-4 flex-row justify-between items-center">
         <Text className="text-white text-xl">{title}</Text>
         <TouchableOpacity>
-          <Text style={styles.text} className="text-lg">
-            Movie List
-          </Text>
+          <Text className="text-lg">Movie List</Text>
         </TouchableOpacity>
       </View>
 
