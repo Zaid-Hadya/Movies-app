@@ -21,16 +21,7 @@ const [trending, setTrending] = useState([1,2,3])/*Array def*/
         <MagnifyingGlassIcon size="30" strokeWidth={2} color="white" />
       </TouchableOpacity>
     </View>
-  
-      <ScrollView 
-      showsVerticalScrollIndicator={false}
-      contentContainerStyle={{paddingBottom: 10}}
-      >
-        {/*Trending Movies*/}
-
-      <TrendingMovies data={trending} />
-      </ScrollView>
-
     </View>
+   
     )
 }
