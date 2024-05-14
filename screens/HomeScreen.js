@@ -8,14 +8,18 @@ import {
   FlatList,
   Image,
   ScrollView,
+  Modal,
+  Button,
 } from "react-native";
 import {
   Bars3CenterLeftIcon,
   MagnifyingGlassIcon,
 } from "react-native-heroicons/outline";
-import MovieList from "../components/movieList";
 
 const HomeScreen = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(null);
+
   const data = [
     {
       id: 1,
@@ -25,7 +29,7 @@ const HomeScreen = () => {
     },
     {
       id: 2,
-      title: "Godzilla x Kong ",
+      title: "Godzilla x Kong",
       imageURL:
         "https://lhsmagpie.com/wp-content/uploads/2024/04/GxK-website-wide.jpg",
     },
@@ -36,63 +40,83 @@ const HomeScreen = () => {
         "https://artofthemovies.co.uk/cdn/shop/products/IMG_9256.jpg?v=1662130213",
     },
     {
-      id: 5,
+      id: 4,
       title: "Joker",
       imageURL: "https://i.redd.it/3k0ldk1dycl31.jpg",
     },
     {
-      id: 6,
+      id: 5,
       title: "Pirates of the Caribbean",
       imageURL:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwNAJ8rjiQmcbkyUWL4YRBNSX1TMjaartc4luB0x3Zb2Cg1vhpfvMNxNylsrYlY0wu6kA&usqp=CAU",
     },
     {
-      id: 7,
+      id: 6,
       title: "Shrek",
       imageURL:
         "https://image.tmdb.org/t/p/original/cG3Am50LUD64j8uTyjLFUpve40x.jpg",
     },
     {
-      id: 8,
+      id: 7,
       title: "Jaws",
       imageURL:
         "https://alltherightmovies.com/wp-content/uploads/2023/04/Capture-4-e1681473230496.jpg",
     },
   ];
 
+  const handlePress = (movie) => {
+    setSelectedMovie(movie);
+    setModalVisible(true);
+  };
+
   return (
-    <View className="flex-1 bg-neutral-800">
+    <View style={{ flex: 1, backgroundColor: "#121212" }}>
       {/* Search bar and logo */}
-      <View className="flex-row justify-between items-center mx-4">
-        <Bars3CenterLeftIcon size="30" strokeWidth={2} color="white" />
-        <Text style={{ color: "white", fontSize: 30, fontWeight: "bold" }}>
+      <View style={styles.header}>
+        <Bars3CenterLeftIcon size={30} strokeWidth={2} color="white" />
+        <Text style={styles.logoText}>
           <Text style={{ color: "red" }}>Mov</Text>ies
         </Text>
         <TouchableOpacity>
-          <MagnifyingGlassIcon size="30" strokeWidth={2} color="white" />
+          <MagnifyingGlassIcon size={30} strokeWidth={2} color="white" />
         </TouchableOpacity>
       </View>
 
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 10 }}
-      ></ScrollView>
+      <ScrollView>
+        {/* Display movie list */}
+        {data.map((item) => (
+          <View key={item.id} style={styles.flatListContainer}>
+            <Image
+              source={{ uri: item.imageURL }}
+              style={{ height: 200, width: "100%" }}
+            />
+            <Text style={styles.title}>{item.title}</Text>
+            {/* Button to show modal */}
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => handlePress(item)}
+            >
+              <Text style={styles.buttonText}>Show Details</Text>
+            </TouchableOpacity>
+          </View>
+        ))}
+      </ScrollView>
 
-      <View>
-        <SafeAreaView />
-        <FlatList
-          data={data}
-          renderItem={({ item }) => (
-            <View style={styles.flatListContainer}>
-              <Image
-                source={{ uri: item.imageURL }}
-                style={{ height: 200, width: "100%" }}
-              />
-              <Text style={styles.Text}>{item.title}</Text>
-            </View>
-          )}
-        />
-      </View>
+      {/* Modal for displaying movie details */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>{selectedMovie?.title}</Text>
+            {/* Add more details about the selected movie here */}
+            <Button title="Close" onPress={() => setModalVisible(false)} />
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -100,22 +124,59 @@ const HomeScreen = () => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginHorizontal: 16,
+    marginTop: 20,
+  },
+  logoText: {
+    color: "white",
+    fontSize: 30,
+    fontWeight: "bold",
+  },
   flatListContainer: {
     backgroundColor: "#ffffff",
     marginVertical: 10,
     marginHorizontal: 16,
     paddingBottom: 16,
-    borderRadius: 50,
+    borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
   },
-  Text: {
+  title: {
     fontSize: 24,
+    fontWeight: "bold",
     paddingTop: 6,
+  },
+  button: {
+    marginTop: 10,
+    backgroundColor: "#ff1100",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+  },
+  buttonText: {
+    color: "white",
     fontWeight: "bold",
   },
-  separator: {
-    height: 2,
-    backgroundColor: "#f1f2f6",
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    backgroundColor: "white",
+    padding: 20,
+    borderRadius: 20,
+    width: "80%",
+    alignItems: "center",
+  },
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 10,
   },
 });
