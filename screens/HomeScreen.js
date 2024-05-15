@@ -3,23 +3,22 @@ import {
   View,
   Text,
   TouchableOpacity,
-  SafeAreaView,
-  StyleSheet,
-  FlatList,
-  Image,
   ScrollView,
   Modal,
   Button,
+  StyleSheet,
 } from "react-native";
 import {
   Bars3CenterLeftIcon,
   MagnifyingGlassIcon,
 } from "react-native-heroicons/outline";
+import MovieItem from "../components/movieItem";
 
 const HomeScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
+  // Define your data here
   const data = [
     {
       id: 1,
@@ -93,7 +92,6 @@ const HomeScreen = () => {
 
   return (
     <View style={{ flex: 1, backgroundColor: "#121212" }}>
-      {/* Search bar and logo */}
       <View style={styles.header}>
         <Bars3CenterLeftIcon size={30} strokeWidth={2} color="white" />
         <Text style={styles.logoText}>
@@ -107,20 +105,11 @@ const HomeScreen = () => {
       <ScrollView>
         {/* Display movie list */}
         {data.map((item) => (
-          <View key={item.id} style={styles.flatListContainer}>
-            <Image
-              source={{ uri: item.imageURL }}
-              style={{ height: 200, width: "100%" }}
-            />
-            <Text style={styles.title}>{item.title}</Text>
-            {/* Button to show modal */}
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => handlePress(item)}
-            >
-              <Text style={styles.buttonText}>Show Details</Text>
-            </TouchableOpacity>
-          </View>
+          <MovieItem
+            key={item.id}
+            item={item}
+            onPress={() => handlePress(item)}
+          />
         ))}
       </ScrollView>
 
@@ -143,8 +132,6 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
-
 const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
@@ -156,31 +143,6 @@ const styles = StyleSheet.create({
   logoText: {
     color: "white",
     fontSize: 30,
-    fontWeight: "bold",
-  },
-  flatListContainer: {
-    backgroundColor: "#ffffff",
-    marginVertical: 10,
-    marginHorizontal: 16,
-    paddingBottom: 16,
-    borderRadius: 20,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    paddingTop: 6,
-  },
-  button: {
-    marginTop: 10,
-    backgroundColor: "#ff1100",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 20,
-  },
-  buttonText: {
-    color: "white",
     fontWeight: "bold",
   },
   modalContainer: {
@@ -202,3 +164,5 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 });
+
+export default HomeScreen;
