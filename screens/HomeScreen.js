@@ -70,9 +70,8 @@ const HomeScreen = () => {
               style={{ width: "100%", height: 200 }}
               resizeMode="contain"
             />
-            <Text style={{ color: "white" }}>{item.title}</Text>
-            <Text>{item.release_date}</Text>
-            <Text style={{ color: "white" }}>{item.overview}</Text>
+            <Text style={styles.outerMovieTitle}>{item.title}</Text>
+            <Text style={styles.outerMovieDate}>{item.release_date}</Text>
           </TouchableOpacity>
         ))}
       </ScrollView>
@@ -87,7 +86,7 @@ const HomeScreen = () => {
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>{selectedMovie?.title}</Text>
-            <Text>Description: {selectedMovie?.description}</Text>
+            <Text>Description: {selectedMovie?.overview}</Text>
             <Button title="Close" onPress={() => setModalVisible(false)} />
           </View>
         </View>
@@ -123,9 +122,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalTitle: {
+    textAlign: "center",
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 10,
+  },
+  outerMovieTitle: {
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "white",
+  },
+  outerMovieDate: {
+    textAlign: "center",
+    color: "white",
+    paddingBottom: 30,
   },
 });
 
