@@ -8,6 +8,7 @@ import {
   Button,
   StyleSheet,
   Image,
+  FlatList,
 } from "react-native";
 import {
   Bars3CenterLeftIcon,
@@ -55,26 +56,29 @@ const HomeScreen = () => {
         </TouchableOpacity>
       </View>
 
-      <ScrollView>
-        {/* Display movie list */}
-        {movies.map((item) => (
-          <TouchableOpacity
-            key={item.id}
-            style={styles.movieItem}
-            onPress={() => handlePress(item)}
-          >
-            <Image
-              source={{
-                uri: `https://image.tmdb.org/t/p/w342/${item.backdrop_path}`,
-              }}
-              style={{ width: "100%", height: 200 }}
-              resizeMode="contain"
-            />
-            <Text style={styles.outerMovieTitle}>{item.title}</Text>
-            <Text style={styles.outerMovieDate}>{item.release_date}</Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
+      <FlatList
+        keyExtractor={(item) => item.id}
+        data={movies}
+        renderItem={({ item }) => (
+          <View>
+            <TouchableOpacity
+              key={item.id}
+              style={styles.movieItem}
+              onPress={() => handlePress(item)}
+            >
+              <Image
+                source={{
+                  uri: `https://image.tmdb.org/t/p/w342/${item.backdrop_path}`,
+                }}
+                style={{ width: "100%", height: 200 }}
+                resizeMode="contain"
+              />
+              <Text style={styles.outerMovieTitle}>{item.title}</Text>
+              <Text style={styles.outerMovieDate}>{item.release_date}</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      />
 
       {/* Modal for displaying movie details */}
       <Modal
