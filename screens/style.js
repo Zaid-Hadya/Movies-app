@@ -1,6 +1,13 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+  redText: {
+    color: "red",
+  },
+  container: {
+    flex: 1,
+    backgroundColor: "#121212",
+  },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",

@@ -37,11 +37,11 @@ const HomeScreen = () => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#121212" }}>
+    <View style={styles.container}>
       <View style={styles.header}>
         <Bars3CenterLeftIcon size={30} strokeWidth={2} color="white" />
         <Text style={styles.logoText}>
-          <Text style={{ color: "red" }}>Mov</Text>ies
+          <Text style={styles.redText}>Mov</Text>ies
         </Text>
         <TouchableOpacity>
           <MagnifyingGlassIcon size={30} strokeWidth={2} color="white" />
