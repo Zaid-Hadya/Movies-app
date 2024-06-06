@@ -1,6 +1,16 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+  buttonText: {
+    color: "white",
+    fontWeight: "bold",
+  },
+  button: {
+    backgroundColor: "#ff1100",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+  },
   redText: {
     color: "red",
   },
@@ -40,6 +50,7 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
   },
   outerMovieTitle: {
+    paddingTop: 10,
     textAlign: "center",
     fontSize: 20,
     fontWeight: "bold",
@@ -48,13 +59,13 @@ export const styles = StyleSheet.create({
   outerMovieDate: {
     textAlign: "center",
     color: "black",
-    paddingBottom: 30,
+    paddingBottom: 10,
   },
   movieItem: {
     backgroundColor: "#ffffff",
     marginVertical: 20,
-    marginHorizontal: 28,
-    paddingTop: 10,
+    marginHorizontal: 29,
+
     paddingBottom: 16,
     borderRadius: 20,
     justifyContent: "center",

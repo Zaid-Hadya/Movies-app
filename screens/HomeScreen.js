@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import {
   Bars3CenterLeftIcon,
   MagnifyingGlassIcon,
 } from "react-native-heroicons/outline";
 import { styles } from "./style";
-import MovieList from "../components/flatList"; // Renamed to avoid name conflict
 import MovieModal from "../components/movieModal"; // Renamed to follow PascalCase convention
+import PaginatedList from "../components/PaginatedList";
 
 const HomeScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -48,7 +48,7 @@ const HomeScreen = () => {
         </TouchableOpacity>
       </View>
 
-      <MovieList movies={movies} handlePress={handlePress} />
+      <PaginatedList handlePress={handlePress} />
 
       {selectedMovie && (
         <MovieModal

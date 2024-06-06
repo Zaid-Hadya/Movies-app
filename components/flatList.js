@@ -1,15 +1,10 @@
 import React from "react";
-import {
-  Text,
-  TouchableOpacity,
-  Image,
-  FlatList as RNFlatList,
-} from "react-native";
+import { Text, TouchableOpacity, Image, FlatList } from "react-native";
 import { styles } from "../screens/style";
 
 const MovieList = ({ movies, handlePress }) => {
   return (
-    <RNFlatList
+    <FlatList
       keyExtractor={(item) => item.id.toString()}
       data={movies}
       renderItem={({ item }) => (
@@ -32,5 +27,14 @@ const MovieList = ({ movies, handlePress }) => {
     />
   );
 };
-
+const styles = StyleSheet.create({
+  item: {
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ccc",
+  },
+  loader: {
+    marginVertical: 50,
+  },
+});
 export default MovieList;
